@@ -6,8 +6,14 @@ class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   //create user object based on UserCredential
-  MyUser? _myUserFromUserCredentials(User user) {
+  MyUser? _myUserFromUserCredentials(User? user) {
     return user != null ? MyUser(uid: user.uid): null;
+  }
+
+  //auth change user stream
+  Stream<MyUser?> get user {
+    return _firebaseAuth.authStateChanges()
+      .map(_myUserFromUserCredentials);
   }
 
   //sign in anonymously
@@ -15,7 +21,7 @@ class AuthenticationService {
     try {
       UserCredential result = await _firebaseAuth.signInAnonymously();
       User? user = result.user;
-      return _myUserFromUserCredentials(user!);
+      return _myUserFromUserCredentials(user);
     } catch (e) {
       print(e.toString());
       return null;
