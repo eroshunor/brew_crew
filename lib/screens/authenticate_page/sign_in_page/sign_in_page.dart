@@ -17,10 +17,10 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
-        title: Text('Sign in to Brew Crew'),
+        title: const Text('Sign in to Brew Crew'),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: ElevatedButton(
           onPressed: () async {
             dynamic result = await _authService.signInAnon();
