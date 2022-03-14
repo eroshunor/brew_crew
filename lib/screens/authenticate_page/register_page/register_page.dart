@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../services/authentication_service .dart';
 import '../../../shared/constants.dart';
+import '../../../shared/loading.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback toggleView;
@@ -14,13 +15,17 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final AuthenticationService _authService = AuthenticationService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
+
   String email = '';
   String password = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading
+    ? Loading()
+    : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -60,9 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ElevatedButton(
                   onPressed: () async {
                     if(_formKey.currentState!.validate()){
+                      setState(() => loading = true);
                       dynamic result = await _authService.registerWithEmailAndPassword(email, password);
                       if (result == null) {
-                        setState(() => error = 'Please supply a valid email');
+                        setState(() {
+                          error = 'Please supply a valid email';
+                          loading = false;
+                        });
                       }
                     }
                   },

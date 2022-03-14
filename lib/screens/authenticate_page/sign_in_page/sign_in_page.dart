@@ -1,7 +1,7 @@
 import 'package:brew_crew/services/authentication_service%20.dart';
 import 'package:flutter/material.dart';
-
 import '../../../shared/constants.dart';
+import '../../../shared/loading.dart';
 
 class SignInPage extends StatefulWidget {
   final VoidCallback toggleView;
@@ -15,13 +15,17 @@ class _SignInPageState extends State<SignInPage> {
 
   final AuthenticationService _authService = AuthenticationService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
+
   String email = '';
   String password = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading
+    ? Loading()
+    : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -61,9 +65,13 @@ class _SignInPageState extends State<SignInPage> {
               ElevatedButton(
                 onPressed: () async {
                   if(_formKey.currentState!.validate()) {
+                    setState(() => loading = true);
                     dynamic result = await _authService.signInWithEmailAndPassword(email, password);
                     if (result == null) {
-                      setState(() => error = 'Could not sign in with those credentials');
+                      setState(() {
+                        error = 'Could not sign in with those credentials';
+                        loading = false;
+                      });
                     }
                   }
                 },
