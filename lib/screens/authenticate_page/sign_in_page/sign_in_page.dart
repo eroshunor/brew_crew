@@ -33,8 +33,8 @@ class _SignInPageState extends State<SignInPage> {
         actions: [
           TextButton.icon(
             onPressed: () => widget.toggleView(),
-            icon: const Icon(Icons.person),
-            label: const Text('Register'),
+            icon: Icon(Icons.person, color: Colors.brown[800]),
+            label: Text('Register', style: TextStyle(color: Colors.brown[800])),
           ),
         ],
       ),
@@ -63,6 +63,9 @@ class _SignInPageState extends State<SignInPage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
+                ),
                 onPressed: () async {
                   if(_formKey.currentState!.validate()) {
                     setState(() => loading = true);
