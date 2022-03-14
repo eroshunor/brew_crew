@@ -12,8 +12,10 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   final AuthenticationService _authService = AuthenticationService();
+  final _formKey = GlobalKey<FormState>();
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +35,19 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
         child: Form(
+          key: _formKey,
             child: Column(
               children: [
                 const SizedBox(height: 20),
                 TextFormField(
+                  validator: (value) => value!.isEmpty ? 'Enter an email' : null,
                   onChanged: (value) {
                     setState(() => email = value);
                   },
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  validator: (value) => value!.length < 6 ? 'Enter a password 6+ character long' : null,
                   onChanged: (value) {
                     setState(() => password = value);
                   },
@@ -51,12 +56,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () async {
-                    print(email);
-                    print(password);
-
+                    if(_formKey.currentState!.validate()){
+                      dynamic result = await _authService.registerWithEmailAndPassword(email, password);
+                      if (result == null) {
+                        setState(() => error = 'Please supply a valid email');
+                      }
+                    }
                   },
                   child: const Text('Register', style: TextStyle(color: Colors.white)),
-                )
+                ),
+                const SizedBox(height: 10),
+                Text(error, style: TextStyle(color: Colors.red, fontSize: 14))
               ],
             )
         ),
