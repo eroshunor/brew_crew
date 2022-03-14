@@ -19,9 +19,9 @@ class HomePage extends StatelessWidget {
             onPressed: () async {
               await _auth.signOut();
             },
-            icon: const Icon(Icons.person),
-            label: const Text('Log out'),
-          )
+            icon: Icon(Icons.person, color: Colors.brown[800]),
+            label: Text('Log out', style: TextStyle(color: Colors.brown[800])),
+          ),
         ],
       ),
       body: const Text('Home Page'),
