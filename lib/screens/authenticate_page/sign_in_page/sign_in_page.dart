@@ -1,6 +1,8 @@
 import 'package:brew_crew/services/authentication_service%20.dart';
 import 'package:flutter/material.dart';
 
+import '../../../shared/constants.dart';
+
 class SignInPage extends StatefulWidget {
   final VoidCallback toggleView;
   const SignInPage({required this.toggleView, Key? key}) : super(key: key);
@@ -40,6 +42,7 @@ class _SignInPageState extends State<SignInPage> {
             children: [
               const SizedBox(height: 20),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 validator: (value) => value!.isEmpty ? 'Enter an email' : null,
                 onChanged: (value) {
                   setState(() => email = value);
@@ -47,6 +50,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Password'),
                 validator: (value) => value!.length < 6 ? 'Enter a password 6+ character long' : null,
                 onChanged: (value) {
                   setState(() => password = value);

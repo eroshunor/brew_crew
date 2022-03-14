@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../services/authentication_service .dart';
+import '../../../shared/constants.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback toggleView;
@@ -40,6 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const SizedBox(height: 20),
                 TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'Email'),
                   validator: (value) => value!.isEmpty ? 'Enter an email' : null,
                   onChanged: (value) {
                     setState(() => email = value);
@@ -47,6 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'Password'),
                   validator: (value) => value!.length < 6 ? 'Enter a password 6+ character long' : null,
                   onChanged: (value) {
                     setState(() => password = value);
