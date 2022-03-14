@@ -1,15 +1,15 @@
-import 'package:brew_crew/services/authentication_service%20.dart';
 import 'package:flutter/material.dart';
+import '../../../services/authentication_service .dart';
 
-class SignInPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final VoidCallback toggleView;
-  const SignInPage({required this.toggleView, Key? key}) : super(key: key);
+  const RegisterPage({required this.toggleView, Key? key}) : super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _RegisterPageState extends State<RegisterPage> {
 
   final AuthenticationService _authService = AuthenticationService();
   String email = '';
@@ -21,12 +21,12 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
-        title: const Text('Sign in to Brew Crew'),
+        title: const Text('Register to Brew Crew'),
         actions: [
           TextButton.icon(
             onPressed: () => widget.toggleView(),
             icon: const Icon(Icons.person),
-            label: const Text('Register'),
+            label: const Text('Sign In'),
           ),
         ],
       ),
@@ -50,12 +50,12 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                    onPressed: () async {
-                      print(email);
-                      print(password);
+                  onPressed: () async {
+                    print(email);
+                    print(password);
 
-                    },
-                    child: const Text('Sign in', style: TextStyle(color: Colors.white)),
+                  },
+                  child: const Text('Register', style: TextStyle(color: Colors.white)),
                 )
               ],
             )
