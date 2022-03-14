@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return loading
-    ? Loading()
+    ? const Loading()
     : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
@@ -81,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: const Text('Register', style: TextStyle(color: Colors.white)),
                 ),
                 const SizedBox(height: 10),
-                Text(error, style: TextStyle(color: Colors.red, fontSize: 14))
+                Text(error, style: const TextStyle(color: Colors.red, fontSize: 14))
               ],
             )
         ),
