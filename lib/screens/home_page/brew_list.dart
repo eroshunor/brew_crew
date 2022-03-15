@@ -1,6 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../model/brew.dart';
+import 'brew_tile.dart';
 
 class BrewList extends StatefulWidget {
   const BrewList({Key? key}) : super(key: key);
@@ -12,12 +14,17 @@ class BrewList extends StatefulWidget {
 class _BrewListState extends State<BrewList> {
   @override
   Widget build(BuildContext context) {
-    final brews = Provider.of<QuerySnapshot?>(context);
-    if (brews != null) {
-      for (var doc in brews.docs) {
-        doc.data();
-      }
-    }
-    return Container();
+    final brews = Provider.of<List<Brew>>(context);
+    brews.forEach((brew) {
+      print(brew.name);
+      print(brew.sugar);
+      print(brew.strength);
+    });
+    return ListView.builder(
+      itemCount: brews.length,
+      itemBuilder: (context, index) {
+        return BrewTile(brew: brews[index]);
+      },
+    );
   }
 }

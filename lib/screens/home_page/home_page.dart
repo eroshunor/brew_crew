@@ -1,7 +1,7 @@
 import 'package:brew_crew/services/database_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../model/brew.dart';
 import '../../services/authentication_service .dart';
 import 'brew_list.dart';
 
@@ -13,9 +13,19 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot?>.value(
+
+    void _showSettingsPanel() {
+      showModalBottomSheet(context: context, builder: (context){
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+          child: Text('Bottom sheet'),
+        );
+      });
+    }
+
+    return StreamProvider<List<Brew>>.value(
       value: DatabaseService().brews,
-      initialData: null,
+      initialData: [],
       child: Scaffold(
         backgroundColor: Colors.brown[100],
         appBar: AppBar(
@@ -28,6 +38,11 @@ class HomePage extends StatelessWidget {
               },
               icon: Icon(Icons.person, color: Colors.brown[800]),
               label: Text('Log out', style: TextStyle(color: Colors.brown[800])),
+            ),
+            TextButton.icon(
+              onPressed: () => _showSettingsPanel(),
+              icon: Icon(Icons.settings, color: Colors.brown[800]),
+              label: Text('Settings', style: TextStyle(color: Colors.brown[800])),
             ),
           ],
         ),
