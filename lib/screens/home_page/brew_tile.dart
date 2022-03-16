@@ -14,6 +14,7 @@ class BrewTile extends StatelessWidget {
         margin: EdgeInsets.only(left: 20, top: 6, right: 20, bottom: 0),
         child: ListTile(
           leading: CircleAvatar(
+            backgroundImage: const AssetImage('lib/assets/coffee_icon.png'),
             radius: 25,
             backgroundColor: Colors.brown[brew.strength],
           ),

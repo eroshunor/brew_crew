@@ -73,9 +73,6 @@ class _SettingsFormState extends State<SettingsForm> {
                   max: 900,
                   divisions: 8,
                   onChanged: (value) => setState(() {
-                    print(value);
-                    print('fennt value lennt current');
-                    print(_currentStrength);
                     _currentStrength = value.toInt().round();
                   }),
                 ),
