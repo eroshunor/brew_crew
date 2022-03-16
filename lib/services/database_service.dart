@@ -23,7 +23,7 @@ class DatabaseService {
       return Brew(
         name: (doc.data() as dynamic)['name'] ?? '',
         strength: (doc.data() as dynamic)['strength'] ?? 0,
-        sugar: (doc.data() as dynamic)['sugars'] ?? '0',
+        sugar: (doc.data() as dynamic)['sugar'] ?? '0',
       );
     }).toList();
   }
